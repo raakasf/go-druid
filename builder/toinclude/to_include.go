@@ -2,6 +2,7 @@ package toinclude
 
 import (
 	"encoding/json"
+	"errors"
 
 	"github.com/grafadruid/go-druid/builder"
 )
@@ -20,13 +21,16 @@ func (b *Base) Type() builder.ComponentType {
 }
 
 func Load(data []byte) (builder.ToInclude, error) {
+	var ti builder.ToInclude
+	if string(data) == "null" {
+		return ti, nil
+	}
 	var t struct {
 		Typ builder.ComponentType `json:"type,omitempty"`
 	}
 	if err := json.Unmarshal(data, &t); err != nil {
 		return nil, err
 	}
-	var ti builder.ToInclude
 	switch t.Typ {
 	case "all":
 		ti = NewAll()
@@ -34,6 +38,8 @@ func Load(data []byte) (builder.ToInclude, error) {
 		ti = NewList()
 	case "none":
 		ti = NewNone()
+	default:
+		return nil, errors.New("unsupported toinclude type")
 	}
 	return ti, json.Unmarshal(data, &ti)
 }
