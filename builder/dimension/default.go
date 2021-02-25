@@ -1,6 +1,6 @@
 package dimension
 
-import "github.com/grafadruid/go-druid/builder/types"
+import "github.com/raakasf/go-druid/builder/types"
 
 type Default struct {
 	Base

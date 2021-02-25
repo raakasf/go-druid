@@ -2,17 +2,18 @@ package main
 
 import (
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
-	"github.com/grafadruid/go-druid"
-	"github.com/grafadruid/go-druid/builder"
-	"github.com/grafadruid/go-druid/builder/aggregation"
-	"github.com/grafadruid/go-druid/builder/datasource"
-	"github.com/grafadruid/go-druid/builder/granularity"
-	"github.com/grafadruid/go-druid/builder/intervals"
-	"github.com/grafadruid/go-druid/builder/postaggregation"
-	"github.com/grafadruid/go-druid/builder/query"
 	"log"
 	"time"
+
+	"github.com/davecgh/go-spew/spew"
+	"github.com/raakasf/go-druid"
+	"github.com/raakasf/go-druid/builder"
+	"github.com/raakasf/go-druid/builder/aggregation"
+	"github.com/raakasf/go-druid/builder/datasource"
+	"github.com/raakasf/go-druid/builder/granularity"
+	"github.com/raakasf/go-druid/builder/intervals"
+	"github.com/raakasf/go-druid/builder/postaggregation"
+	"github.com/raakasf/go-druid/builder/query"
 )
 
 func getConnection() *druid.Client {
@@ -33,7 +34,6 @@ func getConnection() *druid.Client {
 	To experiment, you can use the doubles_sketch_data.tsv file attached in this repo. It is a copy of  https://github.com/apache/druid/blob/master/extensions-contrib/tdigestsketch/src/test/resources/doubles_sketch_data.tsv
 */
 
-
 // tdigestSketchUsingBuilder example using Builder Pattern
 func tdigestSketchUsingBuilder() {
 	d := getConnection()
@@ -49,17 +49,15 @@ func tdigestSketchUsingBuilder() {
 	atds := aggregation.NewTDigestSketch().SetName("merged_sketch").SetFieldName("valuesTDS")
 	a := []builder.Aggregator{atds}
 
-
 	//TDigest Post Aggregation
 	qf := postaggregation.NewQuantilesFromTDigestSketchField().
 		SetType("fieldAccess").
 		SetFieldName("merged_sketch")
 	qa := postaggregation.NewQuantilesFromTDigestSketch().
 		SetField(qf).
-		SetFractions([]float64{0.25, 0.5, 0.75, 0.9, 0.95, 0.99}).  // add additional quantiles as needed
+		SetFractions([]float64{0.25, 0.5, 0.75, 0.9, 0.95, 0.99}). // add additional quantiles as needed
 		SetName("quantiles")
 	pa := []builder.PostAggregator{qa}
-
 
 	ts := query.NewTimeseries().SetDataSource(table).SetIntervals(is).SetAggregations(a).SetPostAggregations(pa).SetGranularity(m).SetLimit(10)
 	var results interface{}

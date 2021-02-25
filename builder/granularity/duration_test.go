@@ -1,10 +1,11 @@
 package granularity
 
 import (
-	"github.com/grafadruid/go-druid/builder/testutil"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/raakasf/go-druid/builder/testutil"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewDuration(t *testing.T) {

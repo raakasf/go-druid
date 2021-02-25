@@ -2,8 +2,9 @@ package query
 
 import (
 	"encoding/json"
-	"github.com/grafadruid/go-druid/builder"
-	"github.com/grafadruid/go-druid/builder/filter"
+
+	"github.com/raakasf/go-druid/builder"
+	"github.com/raakasf/go-druid/builder/filter"
 )
 
 type TimeBoundary struct {

@@ -3,8 +3,8 @@ package dimension
 import (
 	"encoding/json"
 
-	"github.com/grafadruid/go-druid/builder"
-	"github.com/grafadruid/go-druid/builder/types"
+	"github.com/raakasf/go-druid/builder"
+	"github.com/raakasf/go-druid/builder/types"
 )
 
 type PrefixFiltered struct {

@@ -3,7 +3,7 @@ package topnmetric
 import (
 	"encoding/json"
 
-	"github.com/grafadruid/go-druid/builder"
+	"github.com/raakasf/go-druid/builder"
 )
 
 type Inverted struct {

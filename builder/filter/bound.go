@@ -3,9 +3,9 @@ package filter
 import (
 	"encoding/json"
 
-	"github.com/grafadruid/go-druid/builder"
-	"github.com/grafadruid/go-druid/builder/extractionfn"
-	"github.com/grafadruid/go-druid/builder/types"
+	"github.com/raakasf/go-druid/builder"
+	"github.com/raakasf/go-druid/builder/extractionfn"
+	"github.com/raakasf/go-druid/builder/types"
 )
 
 type Bound struct {

@@ -1,8 +1,8 @@
 package druid
 
 import (
-	"github.com/grafadruid/go-druid/builder"
-	"github.com/grafadruid/go-druid/builder/query"
+	"github.com/raakasf/go-druid/builder"
+	"github.com/raakasf/go-druid/builder/query"
 )
 
 const (
