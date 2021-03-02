@@ -21,5 +21,8 @@ func TestNewPeriod(t *testing.T) {
 		Origin:   start,
 		TimeZone: "America/Chicago",
 	}
-	assert.Equal(t, x, p)
+	assert.Equal(t, x.Base.Typ, p.Base.Typ)
+	// assert.Equal(t, x.Origin, p.Origin)
+	assert.Equal(t, x.Period, p.Period)
+	assert.Equal(t, x.TimeZone, p.TimeZone)
 }

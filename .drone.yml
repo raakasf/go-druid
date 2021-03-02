@@ -1,0 +1,29 @@
+---
+kind: pipeline
+type: kubernetes
+name: default
+insecure: true
+
+metadata:
+  namespace: drone
+  labels:
+    app.kubernetes.io/component: drone-kubernetes-secrets
+    app.kubernetes.io/instance: drone-dev-secrets
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: drone-kubernetes-secrets
+    app.kubernetes.io/version: latest
+    helm.sh/chart: drone-kubernetes-secrets-0.1.0
+  annotations:
+    iam.amazonaws.com/role: k8s-grafana-druid-plugin-role
+
+service_account_name: grafana-druid-datasource
+
+workspace:
+  path: /druid-grafana
+
+steps:
+  - name: test
+    image: 539703851677.dkr.ecr.us-west-2.amazonaws.com/druid-grafana-go-builder:latest
+    commands:
+      - go test ./...
+      - go vet
