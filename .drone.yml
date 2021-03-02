@@ -23,7 +23,7 @@ workspace:
 
 steps:
   - name: test
-    image: go
+    image: golang:1.16-alpine
     commands:
       - go test ./...
       - go vet
