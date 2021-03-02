@@ -27,6 +27,3 @@ steps:
     commands:
       - go test ./...
       - go vet
-      - cd examples
-      - go run main.go
-      - go vet main.go
