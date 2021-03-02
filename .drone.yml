@@ -23,7 +23,7 @@ workspace:
 
 steps:
   - name: test
-    image: golang:1.16-alpine
+    image: 539703851677.dkr.ecr.us-west-2.amazonaws.com/druid-grafana-go-builder:latest
     commands:
       - go test ./...
       - go vet
