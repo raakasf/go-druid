@@ -201,9 +201,14 @@ func WithBasicAuth(username, password string) ClientOption {
 	}
 }
 
-func WithSkipTLSVerify(skip bool) ClientOption {
+func WithSkipTLSVerify() ClientOption {
 	return func(opts *clientOptions) {
-		opts.skipTLSVerify = skip
+		if nil == opts.httpClient.Transport {
+			opts.httpClient.Transport = &http.Transport{
+				TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+			}
+		}
+		opts.httpClient.Transport.(*http.Transport).TLSClientConfig.InsecureSkipVerify = true
 	}
 }
 
